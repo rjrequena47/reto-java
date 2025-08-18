@@ -22,6 +22,6 @@ public class CuentaBancaria {
     }
 
     public void consultarSaldo(){
-        System.out.println("El saldo restante de su cuenta es: " + this.saldo);
+        System.out.println(this.titular + ", el saldo restante de su cuenta es: " + this.saldo);
     }
 }

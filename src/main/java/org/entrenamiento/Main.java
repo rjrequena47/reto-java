@@ -1,8 +1,8 @@
 package org.entrenamiento;
 
 import org.entrenamiento.calc.Calculadora;
-import org.entrenamiento.ej1.Persona;
-import org.entrenamiento.ej2.CuentaBancaria;
+//import org.entrenamiento.ej1.Persona;
+//import org.entrenamiento.ej2.CuentaBancaria;
 
 public class Main {
     public static void main(String[] args) {
