@@ -1,43 +1,72 @@
 package org.entrenamiento.calc;
 
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CalculadoraTest {
+
+    private final Calculadora calc = new Calculadora();
+
     @Test
     void testSuma() {
-        Calculadora calc = new Calculadora();
-        double resultado = calc.sumar((double)5, (double)3);
-        assertEquals(8.0, resultado, "La suma debe ser correcta");
+        assertEquals(8.0, calc.sumar((double)5,(double)3));
     }
 
     @Test
     void testResta() {
-        Calculadora calc = new Calculadora();
-        double resultado = calc.restar((double)10, (double)4);
-        assertEquals(6.0, resultado, "La resta debe ser correcta");
+        assertEquals(6.0, calc.restar((double)10, (double)4));
     }
 
     @Test
     void testDivisionCorrecta() {
-        Calculadora calc = new Calculadora();
-        double resultado = calc.dividir((double)10, (double)2);
-        assertEquals(5.0, resultado, "La división debe ser correcta");
+        assertEquals(5.0, calc.dividir((double)10, (double)2));
     }
 
     @Test
     void testDivisionPorCero() {
-        Calculadora calc = new Calculadora();
-        // Esperamos que lance ArithmeticException
-        assertThrows(ArithmeticException.class, () -> {
-            calc.dividir((double)10, (double)0);
-        }, "Debe lanzar excepción al dividir entre cero");
+        assertThrows(ArithmeticException.class, () -> 
+            calc.dividir((double)10, (double)0));
     }
 
     @Test
     void testMultiplicacion() {
-        Calculadora calc = new Calculadora();
-        double resultado = calc.multiplicar((double)5, (double)3);
-        assertEquals(15.0, resultado, "La multiplicación debe ser correcta");
+        assertEquals(15.0, calc.multiplicar((double)5, (double)3));
+    }
+
+    @Test
+    void testPotencia() {
+        assertEquals(25.0, calc.potencia((double)5, (double)2));
+    }
+
+    @Test
+    void testRaizCuadrada() {
+        assertEquals(3.0, calc.raizCuadrada((double)9));
+    }
+
+    @Test
+    void testRaizNegativa() {
+        assertThrows(IllegalArgumentException.class, () -> 
+            calc.raizCuadrada((double)-10));
+    }
+
+    @Test
+    void testModulo() {
+        assertEquals(1.0, calc.modulo((double)9, (double)4));
+    }
+
+    
+    @DisplayName("Prueba múltiple de sumas con parámetros")
+    @ParameterizedTest
+    @CsvSource({
+        "1, 2, 3",
+        "5, 5, 10",
+        "-3, 3, 0"
+    })
+    void testSumaConParametros(double a, double b, double esperado) {
+        assertEquals(esperado, calc.sumar(a, b));
     }
 }
